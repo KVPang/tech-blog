@@ -4,22 +4,23 @@ const allRoutes = require("./controllers");
 
 const session = require("express-session");
 const sequelize = require("./config/connection");
+
 // connect session data to sequelize/saving express sequelize data 
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 // Set up Express App
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // importing models
-const { User, Blog } = require("./models");
+const { User, Comment, Post } = require("./models");
 
 // data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const sess = {
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SECRET,
   cookie: {
     maxAge: 2 * 60 * 60 * 1000
   },
